@@ -99,7 +99,7 @@ def managed(name, passphrase, entries, force_remove=False):
             if force_remove:
                 keep_list.append(entry["alias"])
 
-            existing_entry = __salt__["keystore.list"](name, passphrase, entry["alias"])
+            existing_entry = __salt__["keystore.list"](name, passphrase, entry["alias"].lower())
             if existing_entry:
                 existing_sha1 = existing_entry[0]["sha1"]
                 new_sha1 = __salt__["x509.read_certificate"](entry["certificate"])[
